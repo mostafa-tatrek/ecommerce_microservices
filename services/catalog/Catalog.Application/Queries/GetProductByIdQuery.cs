@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Catalog.Application.Responses;
+using MediatR;
+
+namespace Catalog.Application.Queries
+{
+    public class GetProductByIdQuery : IRequest<ProductReponseDto>
+    {
+        public string Id { get; set; }
+
+        public GetProductByIdQuery(string id)
+        {
+            Id = id;
+        }
+    }
+}

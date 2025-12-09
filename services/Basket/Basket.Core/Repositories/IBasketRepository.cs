@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Basket.Core.Entites;
+
+namespace Basket.Core.Repositories
+{
+    public interface IBasketRepository
+    {
+        Task<ShoppingCart> GetBasket(string userName);
+        Task<ShoppingCart> UpdateBasket(ShoppingCart cart);
+        Task DeleteBasket(string userName);
+    }
+}

@@ -1,0 +1,45 @@
+services:
+  catalog.api:
+    image: ${DOCKER_REGISTRY-}catalogapi
+    build:
+      context: .
+      dockerfile: services/catalog/Catalog.API/Dockerfile
+    ports:
+    - "8000:8000"
+    environment:
+      - ASPNETCORE_URLS=http://+:8000
+      - DatabaseSettings__ConnectionString=mongodb://catalogdb:27017
+      - DatabaseSettings__DatabaseName=CatalogDb
+      - DatabaseSettings__BrandsCollection= Brands
+      - DatabaseSettings__TypesCollection= Types
+      - DatabaseSettings__ProductsCollection= Products
+    depends_on:
+      - catalogdb
+  catalogdb:
+      image: mongo
+      container_name: catalogdb
+      ports:
+        - "27017:27017"
+      volumes:
+        - catalogdbdata:/data/db     
+  Basket.api:
+    image: ${DOCKER_REGISTRY-}basketapi
+    build:
+      context: .
+      dockerfile: services/basket/Basket.API/Dockerfile
+    ports:
+    - "8001:8001"
+    environment:
+    - ASPNETCORE_URLS=http://+:8001
+    - CacheSettings__ConnectionString=basketdb:6379
+    depends_on:
+      - basketdb
+  basketdb:
+    image: redis:alpine
+    container_name: basketdb
+    restart: always
+    ports:
+      - "6379:6379"  
+volumes:
+    catalogdbdata:
+
