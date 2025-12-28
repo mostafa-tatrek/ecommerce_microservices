@@ -4,7 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
 import { CoreModule } from '../core/core-module';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
+import { errorInterceptor } from '../core/interceptors/error-interceptor';
 
 @NgModule({
   declarations: [
@@ -14,10 +15,10 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     CoreModule,
-    HttpClientModule  
+    HttpClientModule
   ],
   providers: [
-    provideBrowserGlobalErrorListeners()
+     provideHttpClient(withInterceptors([errorInterceptor]))
   ],
   bootstrap: [App]
 })
