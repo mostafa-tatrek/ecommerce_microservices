@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { HomeRoutingModule } from './home-routing-module';
 import { Home } from './home/home';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { Home } from './home/home';
   ],
   imports: [
     CommonModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    CarouselModule.forRoot()
   ]
 })
 export class HomeModule { }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IProduct } from '../../shared/models/product';
 import { StoreService } from '../store.service';
 import { ActivatedRoute } from '@angular/router';
+import { BreadcrumbService } from 'xng-breadcrumb';
 
 @Component({
   selector: 'app-product-details',
@@ -15,8 +16,7 @@ export class ProductDetails {
   constructor(
     private storeService:StoreService,
     private activatedRoute:ActivatedRoute,
-    private bcService:BreadcrumbService,
-    private basketService:BasketService
+    private bcService:BreadcrumbService
   )
   {
 
@@ -26,12 +26,7 @@ export class ProductDetails {
   }
   dec() { if (this.quantity > 1) this.quantity--; }
   inc() { this.quantity++; }
-  addToCart() {
-    // purely demo; no API
-    if(this.product){
-      this.basketService.addItemToBasket(this.product,this.quantity)
-    }
-  }
+
 
   loadProduct(){
     const id = this.activatedRoute.snapshot.paramMap.get('id');
