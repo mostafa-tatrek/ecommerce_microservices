@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IProduct } from '../../shared/models/product';
 import { StoreService } from '../store.service';
 import { ActivatedRoute } from '@angular/router';
 import { BreadcrumbService } from 'xng-breadcrumb';
+import { BasketService } from '../../basket/basket';
 
 @Component({
   selector: 'app-product-details',
@@ -10,23 +11,31 @@ import { BreadcrumbService } from 'xng-breadcrumb';
   templateUrl: './product-details.html',
   styleUrl: './product-details.scss',
 })
-export class ProductDetails {
-   product?:IProduct;
+export class ProductDetails implements OnInit {
+    product?:IProduct;
   quantity=1;
   constructor(
     private storeService:StoreService,
     private activatedRoute:ActivatedRoute,
-    private bcService:BreadcrumbService
-  )
-  {
-
-  }
+    private bcService:BreadcrumbService,
+    private basketService:BasketService
+  ){}
   ngOnInit(): void {
     this.loadProduct()
   }
+
+
+
+
   dec() { if (this.quantity > 1) this.quantity--; }
   inc() { this.quantity++; }
 
+  addToCart() {
+    // purely demo; no API
+    if(this.product){
+      this.basketService.addItemToBasket(this.product,this.quantity)
+    }
+  }
 
   loadProduct(){
     const id = this.activatedRoute.snapshot.paramMap.get('id');

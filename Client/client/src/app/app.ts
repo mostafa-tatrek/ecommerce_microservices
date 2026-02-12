@@ -1,4 +1,5 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
+import { BasketService } from '../basket/basket';
 
 @Component({
   selector: 'app-root',
@@ -6,6 +7,14 @@ import { Component, signal } from '@angular/core';
   standalone: false,
   styleUrl: './app.scss'
 })
-export class App {
+export class App  implements OnInit{
   protected readonly title = signal('client');
+   constructor(private basketService:BasketService){
+  }
+  ngOnInit(): void {
+    const basket_name = localStorage.getItem("basket_username");
+    if(basket_name){
+      this.basketService.getBasket(basket_name);
+    }
+}
 }
