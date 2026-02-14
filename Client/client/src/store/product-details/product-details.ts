@@ -19,7 +19,7 @@ export class ProductDetails implements OnInit {
     private activatedRoute:ActivatedRoute,
     private bcService:BreadcrumbService,
     private basketService:BasketService
-  ){}
+  ){} 
   ngOnInit(): void {
     this.loadProduct()
   }

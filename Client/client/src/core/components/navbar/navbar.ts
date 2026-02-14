@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { BasketService } from '../../../basket/basket';
 import { IBasketItem } from '../../../shared/models/basket';
-import { AccountService } from '../../../account/account.service';
+import { Account} from '../../../account/account';
 
 @Component({
   selector: 'app-navbar',
   standalone: false,
-  templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.scss',
+  templateUrl: './navbar.html',
+  styleUrl: './navbar.scss',
 })
 export class NavbarComponent implements OnInit {
   isCollapsed = true;
   isUserAuthenticated: boolean = false;
   constructor(
     public basketService: BasketService,
-    public accountService: AccountService,
+    public accountService: Account,
   ) {}
 
   ngOnInit(): void {
